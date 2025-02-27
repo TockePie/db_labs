@@ -50,40 +50,49 @@
 
     actor Client
 
+    ' Група взаємодії з обліковим записом
+    usecase "UserManageAccount\nВзаємодія з\nобліковим записом" as UInteraction
     usecase "UserRegistration\nРеєстрація" as URegister
     usecase "UserLogin\nВхід у систему" as ULogin
 
+    UInteraction -u-> URegister
+    UInteraction -u-> ULogin
+
+    ' Група взаємодії з результатами
+    usecase "SurveyManageResults\nВзаємодія\nз результатами" as SResults
+    usecase "SurveyResultsView\nПерегляд відповідей" as SView
+    usecase "UserCompletesSurvey\nЗаповнення опитування" as SComplete
+
+    SResults -d-> SView
+    SResults -d-> SComplete
+
+    ' Інші сценарії роботи з опитуваннями
     usecase "SurveyCreate\nСтворення опитування" as SCreate
     usecase "SurveyUpdate\nОновлення опитування" as SUpdate
     usecase "SurveyDelete\nВидалення опитування" as SDelete
-    usecase "SurveyShareAccess\nНадання доступу" as SShare
     usecase "SurveyReminder\nНагадування" as SReminder
 
-    usecase "UserCompletesSurvey\nЗаповнення опитування" as SComplete
     usecase "UserEditResponses\nРедагування відповідей" as SEdit
-    usecase "SurveyResultsView\nПерегляд відповідей" as SView
     usecase "SurveyResultsExport\nЕкспорт результатів" as SExport
     usecase "SurveyFeedback\nНадання відгуку" as SFeedback
 
-    Client -[hidden]-> ULogin
+    Client -[hidden]-> UInteraction
 
-    Client -u-> URegister
-    Client -u-> ULogin
-
+    ' Зв'язки клієнта
+    Client -u-> UInteraction
+    Client -d-> SResults
     Client -l-> SCreate
-    Client -l-> SReminder
+    Client -d-> SReminder
+    Client -l-> SFeedback
 
-    Client -r-> SComplete
-    Client -r-> SView
-    Client -r-> SFeedback
-
-    SView ..> SExport : "Допоміжний сценарій"
-    SComplete ..> SEdit : "Допоміжний сценарій"
-    SCreate ..> SShare : "Допоміжний сценарій"
-    SCreate ..> SUpdate : "Допоміжний сценарій"
-    SCreate ..> SDelete : "Допоміжний сценарій"
+    ' Допоміжні сценарії
+    SView ..> SExport
+    SComplete ..> SEdit
+    SCreate ..> SUpdate
+    SCreate ..> SDelete
 
 @enduml
+
 </center>
 
 ## Example
