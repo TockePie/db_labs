@@ -35,6 +35,66 @@
 
 </center>
 
+## Схема клієнта
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;"
+>
+
+@startuml
+
+    left to right direction
+
+    actor Client
+
+    ' Група: Реєстрація та автентифікація
+    usecase "User Registration\nРеєстрація" as URegister
+    usecase "User Login\nВхід у систему" as ULogin
+
+    ' Група: Управління опитуваннями
+    usecase "Survey Create\nСтворення опитування" as SCreate
+    usecase "Survey Update\nОновлення опитування" as SUpdate
+    usecase "Survey Delete\nВидалення опитування" as SDelete
+    usecase "Survey Share Access\nНадання доступу" as SShare
+    usecase "Survey Reminder\nНагадування" as SReminder
+
+    ' Група: Проходження опитування та перегляд результатів
+    usecase "User Completes Survey\nЗаповнення опитування" as SComplete
+    usecase "User Edit Responses\nРедагування відповідей" as SEdit
+    usecase "Survey Results View\nПерегляд відповідей" as SView
+    usecase "Survey Results Export\nЕкспорт результатів" as SExport
+    usecase "Survey Feedback\nНадання відгуку" as SFeedback
+
+    ' Підключення користувача до основних дій
+    Client --> URegister
+    Client --> ULogin
+
+    Client --> SCreate
+    Client --> SUpdate
+    Client --> SDelete
+    Client --> SShare
+    Client --> SReminder
+
+    Client --> SComplete
+    Client --> SEdit
+    Client --> SView
+    Client --> SExport
+    Client --> SFeedback
+
+    ' Допоміжні сценарії
+    SView ..> SExport : "Допоміжний сценарій"
+    SComplete ..> SEdit : "Допоміжний сценарій"
+    SCreate ..> SShare : "Допоміжний сценарій"
+    SCreate ..> SUpdate : "Допоміжний сценарій"
+    SCreate ..> SDelete : "Допоміжний сценарій"
+
+@enduml
+
+</center>
+
 ## Example
 
 В цьому файлі необхідно перелічити всі документи, розроблені в проекті та дати посилання на них.
