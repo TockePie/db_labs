@@ -50,41 +50,33 @@
 
     actor Client
 
-    ' Група: Реєстрація та автентифікація
-    usecase "User Registration\nРеєстрація" as URegister
-    usecase "User Login\nВхід у систему" as ULogin
+    usecase "UserRegistration\nРеєстрація" as URegister
+    usecase "UserLogin\nВхід у систему" as ULogin
 
-    ' Група: Управління опитуваннями
-    usecase "Survey Create\nСтворення опитування" as SCreate
-    usecase "Survey Update\nОновлення опитування" as SUpdate
-    usecase "Survey Delete\nВидалення опитування" as SDelete
-    usecase "Survey Share Access\nНадання доступу" as SShare
-    usecase "Survey Reminder\nНагадування" as SReminder
+    usecase "SurveyCreate\nСтворення опитування" as SCreate
+    usecase "SurveyUpdate\nОновлення опитування" as SUpdate
+    usecase "SurveyDelete\nВидалення опитування" as SDelete
+    usecase "SurveyShareAccess\nНадання доступу" as SShare
+    usecase "SurveyReminder\nНагадування" as SReminder
 
-    ' Група: Проходження опитування та перегляд результатів
-    usecase "User Completes Survey\nЗаповнення опитування" as SComplete
-    usecase "User Edit Responses\nРедагування відповідей" as SEdit
-    usecase "Survey Results View\nПерегляд відповідей" as SView
-    usecase "Survey Results Export\nЕкспорт результатів" as SExport
-    usecase "Survey Feedback\nНадання відгуку" as SFeedback
+    usecase "UserCompletesSurvey\nЗаповнення опитування" as SComplete
+    usecase "UserEditResponses\nРедагування відповідей" as SEdit
+    usecase "SurveyResultsView\nПерегляд відповідей" as SView
+    usecase "SurveyResultsExport\nЕкспорт результатів" as SExport
+    usecase "SurveyFeedback\nНадання відгуку" as SFeedback
 
-    ' Підключення користувача до основних дій
-    Client --> URegister
-    Client --> ULogin
+    Client -[hidden]-> ULogin
 
-    Client --> SCreate
-    Client --> SUpdate
-    Client --> SDelete
-    Client --> SShare
-    Client --> SReminder
+    Client -u-> URegister
+    Client -u-> ULogin
 
-    Client --> SComplete
-    Client --> SEdit
-    Client --> SView
-    Client --> SExport
-    Client --> SFeedback
+    Client -l-> SCreate
+    Client -l-> SReminder
 
-    ' Допоміжні сценарії
+    Client -r-> SComplete
+    Client -r-> SView
+    Client -r-> SFeedback
+
     SView ..> SExport : "Допоміжний сценарій"
     SComplete ..> SEdit : "Допоміжний сценарій"
     SCreate ..> SShare : "Допоміжний сценарій"
@@ -92,7 +84,6 @@
     SCreate ..> SDelete : "Допоміжний сценарій"
 
 @enduml
-
 </center>
 
 ## Example
