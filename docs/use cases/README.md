@@ -35,6 +35,57 @@
 
 </center>
 
+## Схема клієнта
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;"
+>
+
+@startuml
+
+    left to right direction
+
+    actor Client
+
+    usecase "UserRegistration\nРеєстрація" as URegister
+    usecase "UserLogin\nВхід у систему" as ULogin
+
+    usecase "SurveyCreate\nСтворення опитування" as SCreate
+    usecase "SurveyUpdate\nОновлення опитування" as SUpdate
+    usecase "SurveyDelete\nВидалення опитування" as SDelete
+    usecase "SurveyShareAccess\nНадання доступу" as SShare
+    usecase "SurveyReminder\nНагадування" as SReminder
+
+    usecase "UserCompletesSurvey\nЗаповнення опитування" as SComplete
+    usecase "UserEditResponses\nРедагування відповідей" as SEdit
+    usecase "SurveyResultsView\nПерегляд відповідей" as SView
+    usecase "SurveyResultsExport\nЕкспорт результатів" as SExport
+    usecase "SurveyFeedback\nНадання відгуку" as SFeedback
+
+    Client -[hidden]-> ULogin
+
+    Client -u-> URegister
+    Client -u-> ULogin
+
+    Client -l-> SCreate
+    Client -l-> SReminder
+
+    Client -r-> SComplete
+    Client -r-> SView
+    Client -r-> SFeedback
+
+    SView ..> SExport : "Допоміжний сценарій"
+    SComplete ..> SEdit : "Допоміжний сценарій"
+    SCreate ..> SShare : "Допоміжний сценарій"
+    SCreate ..> SUpdate : "Допоміжний сценарій"
+    SCreate ..> SDelete : "Допоміжний сценарій"
+
+@enduml
+</center>
+
 ## Example
 
 В цьому файлі необхідно перелічити всі документи, розроблені в проекті та дати посилання на них.
