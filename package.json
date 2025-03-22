@@ -16,6 +16,7 @@
     "vitepress": "^1.6.3"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "markdown-it": "^14.1.0",
     "markdown-it-admonition": "^1.0.4",
     "markdown-it-katex": "^2.0.3",
