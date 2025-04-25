@@ -105,3 +105,8 @@ dist
 
 # Manual
 docs/.vitepress/cache
+.idea/workspace.xml
+*.xml
+.idea/.name
+.idea/workspace.xml
+.idea/workspace.xml
