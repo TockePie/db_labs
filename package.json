@@ -13,7 +13,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "vitepress": "^1.6.3"
+    "vitepress": "^0.1.1"
   },
   "dependencies": {
     "gh-pages": "^6.3.0",
