@@ -95,8 +95,3 @@ VALUES
         (SELECT id FROM "User" WHERE email = 'marta@example.com'),
         (SELECT id FROM "Quiz" WHERE title = 'Java Basics')
     );
-
-
-
-
-
